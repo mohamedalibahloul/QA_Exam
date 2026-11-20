@@ -1,0 +1,2218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Case Sheet · Hydatis · Maison Lumen Cart & Promo API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f4f7fc;
+        padding: 40px 20px;
+        color: #1e293b;
+      }
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .template-card {
+        background: #fff;
+        border-radius: 28px;
+        box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.15);
+        padding: 32px 36px 40px;
+        border: 1px solid #e9eef3;
+        margin-bottom: 28px;
+      }
+      .template-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #eef2f6;
+        padding-bottom: 18px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .template-header h2 {
+        font-weight: 600;
+        font-size: 24px;
+        letter-spacing: -0.3px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #0b2b4a;
+      }
+      .template-header h2 i {
+        color: #2f6f9f;
+        font-size: 22px;
+      }
+      .badge-company {
+        background: #dceaf5;
+        color: #1b4b6c;
+        padding: 6px 18px;
+        border-radius: 60px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .grid-2col {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 32px;
+      }
+      .grid-3col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px 28px;
+      }
+      .field-label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: #5f7d9c;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 4px;
+      }
+      .field-label .required {
+        color: #b91c1c;
+        font-size: 14px;
+      }
+      .field-value {
+        font-size: 15px;
+        font-weight: 500;
+        color: #0f2b40;
+        background: #f8fafc;
+        padding: 8px 14px;
+        border-radius: 12px;
+        border: 1px solid #e2e9f2;
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .field-value .tag {
+        background: #e0e9f3;
+        padding: 2px 12px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1a405b;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1b3b57;
+        margin: 22px 0 16px;
+        padding-bottom: 6px;
+        border-bottom: 1px dashed #d6e2ef;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .section-title i {
+        color: #2f6f9f;
+        font-size: 18px;
+        width: 24px;
+      }
+      .table-wrap {
+        overflow-x: auto;
+        margin: 12px 0 8px;
+        border-radius: 16px;
+        border: 1px solid #e2e9f2;
+        background: #fafdff;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        min-width: 900px;
+      }
+      th {
+        background: #eef4fa;
+        color: #1d3b57;
+        font-weight: 600;
+        padding: 14px 12px;
+        text-align: left;
+        border-bottom: 1px solid #d2dfed;
+      }
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #e6edf6;
+        color: #1f3d5a;
+        vertical-align: top;
+      }
+      .placeholder-note {
+        background: #fef9e7;
+        border: 1px dashed #f0c674;
+        border-radius: 8px;
+        padding: 12px 18px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #7a6a2b;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .placeholder-note i {
+        font-size: 18px;
+        color: #d4a12b;
+      }
+      .case-id {
+        font-family: ui-monospace, monospace;
+        font-size: 12.5px;
+        color: #0b4f7a;
+        font-weight: 600;
+      }
+      .explain-box {
+        background: #f0f7ff;
+        border: 1px solid #cfe3f5;
+        border-radius: 14px;
+        padding: 16px 20px;
+        margin-bottom: 22px;
+      }
+      .explain-box h4 {
+        font-size: 14px;
+        color: #1b3b57;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .explain-box h4 i {
+        color: #2f6f9f;
+      }
+      .explain-box .naming {
+        font-family: ui-monospace, monospace;
+        font-size: 13px;
+        background: #fff;
+        border: 1px solid #dbe7f2;
+        border-radius: 8px;
+        padding: 10px 14px;
+        color: #0b4f7a;
+        margin-bottom: 10px;
+      }
+      .explain-box ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .explain-box ul li {
+        font-size: 13px;
+        color: #33546f;
+        padding: 4px 0 4px 22px;
+        position: relative;
+      }
+      .explain-box ul li::before {
+        content: "▸";
+        position: absolute;
+        left: 6px;
+        color: #2f6f9f;
+      }
+      .explain-box ul li code,
+      td code {
+        font-family: ui-monospace, monospace;
+        background: #e8f1fa;
+        padding: 1px 6px;
+        border-radius: 5px;
+        font-size: 12.5px;
+      }
+      .area-chip {
+        display: inline-block;
+        background: #e0e9f3;
+        color: #1a405b;
+        padding: 2px 10px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .batch-header {
+        background: #eef4fa;
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 24px 0 12px;
+        font-weight: 600;
+        font-size: 15px;
+        color: #1b3b57;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-left: 4px solid #2f6f9f;
+      }
+      .batch-header i {
+        color: #2f6f9f;
+      }
+      .batch-header .batch-count {
+        background: #dceaf5;
+        color: #1b4b6c;
+        padding: 2px 12px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: auto;
+      }
+      .prio {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
+      .prio-h {
+        background: #f8dddd;
+        color: #a13d3d;
+      }
+      .prio-m {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .prio-l {
+        background: #e2e8f0;
+        color: #475569;
+      }
+      .proposed-badge {
+        display: inline-block;
+        background: #ede9fe;
+        color: #6d28d9;
+        padding: 1px 8px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 600;
+        margin-left: 4px;
+        vertical-align: middle;
+      }
+      @media (max-width: 900px) {
+        .grid-2col,
+        .grid-3col {
+          grid-template-columns: 1fr;
+        }
+        .template-card {
+          padding: 24px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="template-card">
+        <div class="placeholder-note">
+          <i class="fas fa-info-circle"></i>
+          <span
+            ><strong>Test Case Plan:</strong> This document lists all 102
+            planned automated test cases for the Maison Lumen Cart &amp; Promo
+            Code API, executed with <strong>pytest (Python)</strong>. It is the
+            <em>planning</em> document — execution results, defects, summary and
+            approval are recorded later in the release document.</span
+          >
+        </div>
+
+        <div class="template-header">
+          <h2>
+            <i class="fas fa-vial"></i> Software Test Case Sheet ·
+            <span style="color: #94a3b8; font-weight: 400"
+              >Maison Lumen Cart &amp; Promo API</span
+            >
+          </h2>
+          <span class="badge-company"
+            ><i class="fas fa-check-double"></i> HYD-TCS-QA-001 · v1.3</span
+          >
+        </div>
+
+        <!-- Overview -->
+        <div
+          class="explain-box"
+          style="background: #f0fdf4; border-color: #bbf7d0"
+        >
+          <h4 style="color: #166534">
+            <i class="fas fa-clipboard-list" style="color: #16a34a"></i>
+            Overview
+          </h4>
+          <p
+            style="
+              font-size: 14px;
+              color: #33546f;
+              line-height: 1.65;
+              margin: 0;
+            "
+          >
+            I derived <strong>102 test cases</strong> directly from the
+            specification (<code>SPEC.md</code>), covering ten functional areas:
+            <strong>Catalogue</strong>,
+            <strong>Cart creation &amp; reading</strong>,
+            <strong>Quantities</strong>, <strong>Stock</strong>,
+            <strong>Totals &amp; shipping</strong>,
+            <strong>Promo codes</strong>, <strong>Checkout</strong>,
+            <strong>Order status</strong>, <strong>Concurrency</strong> and
+            <strong>Unclear spec points</strong>. Each case is named
+            <code>stc-&lt;module&gt;-&lt;NN&gt;-&lt;short description&gt;</code>
+            and traces back to a spec rule. Cases tagged
+            <span class="proposed-badge">@proposed</span> in the ambiguous
+            module cover places where the spec is silent — a failure there must
+            be discussed with the spec author before it is reported as a bug.
+          </p>
+        </div>
+
+        <!-- Naming convention -->
+        <div class="explain-box">
+          <h4><i class="fas fa-tags"></i> Test Case Naming Convention</h4>
+          <div class="naming">
+            stc-&lt;module&gt;-&lt;NN&gt;-&lt;short description&gt;
+          </div>
+          <ul>
+            <li>
+              <code>stc</code> — Spec Test Case (every case is derived from
+              <code>SPEC.md</code>).
+            </li>
+            <li>
+              <code>&lt;module&gt;</code> — functional module:
+              <code>prod</code> (catalogue), <code>cart</code>,
+              <code>item</code> (quantities), <code>stock</code>,
+              <code>tot</code> (totals &amp; shipping), <code>promo</code>,
+              <code>chk</code> (checkout), <code>ord</code> (order status),
+              <code>conc</code> (concurrency), <code>amb</code> (ambiguous).
+            </li>
+            <li>
+              <code>&lt;NN&gt;</code> — sequence number within the module.
+            </li>
+            <li>
+              <code>&lt;short description&gt;</code> — what the case asserts, in
+              one phrase.
+            </li>
+            <li>
+              Example: <code>stc-promo-09-second discount refused</code> = Spec
+              Test Case, Promo module, case 9, asserting that a second discount
+              code is refused.
+            </li>
+          </ul>
+        </div>
+
+        <!-- 01 Identification -->
+        <div class="section-title">
+          <i class="fas fa-id-badge"></i> 01 Test Case Identification
+        </div>
+        <div class="grid-3col">
+          <div>
+            <span class="field-label"
+              >Project <span class="required">*</span></span
+            >
+            <div class="field-value">Maison Lumen QA Case Study</div>
+          </div>
+          <div>
+            <span class="field-label"
+              >REQ STC ID <span class="required">*</span></span
+            >
+            <div class="field-value">HYD-TCS-QA-001</div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Requirement ID <span class="required">*</span></span
+            >
+            <div class="field-value">SPEC v1 (Cart &amp; Promo Codes)</div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Module / Component <span class="required">*</span></span
+            >
+            <div class="field-value">Cart &amp; Promo API</div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Feature Name <span class="required">*</span></span
+            >
+            <div class="field-value">
+              Catalogue, Cart, Quantities, Stock, Totals, Promo, Checkout,
+              Orders, Concurrency, Ambiguous
+            </div>
+          </div>
+          <div>
+            <span class="field-label">Sprint ID</span>
+            <div class="field-value">S1 — Pre-launch</div>
+          </div>
+          <div>
+            <span class="field-label">Release ID</span>
+            <div class="field-value">R1.0</div>
+          </div>
+          <div>
+            <span class="field-label">Build Number</span>
+            <div class="field-value">B-01 (server.js)</div>
+          </div>
+          <div>
+            <span class="field-label">API Version</span>
+            <div class="field-value">v1 (spec v1)</div>
+          </div>
+          <div>
+            <span class="field-label">Traceability Ref</span>
+            <div class="field-value">SPEC §1–§6</div>
+          </div>
+          <div>
+            <span class="field-label">Compliance Impact</span>
+            <div class="field-value">High (money &amp; stock integrity)</div>
+          </div>
+          <div>
+            <span class="field-label">User Story</span>
+            <div class="field-value">Shopping cart &amp; promo code API</div>
+          </div>
+          <div style="grid-column: span 3">
+            <span class="field-label"
+              >Test Objective <span class="required">*</span></span
+            >
+            <div class="field-value">
+              Verify the Cart &amp; Promo API against SPEC.md v1:
+              quantities/stock rules, totals &amp; rounding, promo-code rules,
+              input validation, checkout/order state machine, and concurrency
+              safety.
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 Classification -->
+        <div class="section-title">
+          <i class="fas fa-tag"></i> 02 Test Classification &amp; Governance
+        </div>
+        <div class="grid-3col">
+          <div>
+            <span class="field-label"
+              >Test Type <span class="required">*</span></span
+            >
+            <div class="field-value">
+              Functional · Integration · Robustness · Concurrency
+            </div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Priority <span class="required">*</span></span
+            >
+            <div class="field-value">
+              Critical (money/stock) → High → Medium → Low
+            </div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Risk Level <span class="required">*</span></span
+            >
+            <div class="field-value">High</div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Execution Status <span class="required">*</span></span
+            >
+            <div class="field-value"><span class="tag">Not Executed</span></div>
+          </div>
+          <div>
+            <span class="field-label">Regression Flag</span>
+            <div class="field-value">Yes</div>
+          </div>
+          <div>
+            <span class="field-label">Automation Flag</span>
+            <div class="field-value">Automated (pytest)</div>
+          </div>
+          <div>
+            <span class="field-label">Automation Script Ref</span>
+            <div class="field-value">tests/ · pytest</div>
+          </div>
+          <div>
+            <span class="field-label">CI/CD Pipeline Ref</span>
+            <div class="field-value">Optional — not wired (documented)</div>
+          </div>
+          <div>
+            <span class="field-label">Retest Required</span>
+            <div class="field-value">Yes</div>
+          </div>
+          <div>
+            <span class="field-label">Defect Reference</span>
+            <div class="field-value">Recorded in release document</div>
+          </div>
+          <div>
+            <span class="field-label">Security Classification</span>
+            <div class="field-value">Internal</div>
+          </div>
+          <div>
+            <span class="field-label">Approval Status</span>
+            <div class="field-value"><span class="tag">Pending</span></div>
+          </div>
+        </div>
+
+        <!-- 03 Test Run Info -->
+        <div class="section-title">
+          <i class="fas fa-info-circle"></i> 03 Test Run Information
+        </div>
+        <div class="grid-3col">
+          <div>
+            <span class="field-label"
+              >Tester Name <span class="required">*</span></span
+            >
+            <div class="field-value">Mohamed Ali Bahloul</div>
+          </div>
+          <div>
+            <span class="field-label">Reviewer</span>
+            <div class="field-value">Hydatis QA</div>
+          </div>
+          <div>
+            <span class="field-label">QA Validator</span>
+            <div class="field-value">Hydatis QA</div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Date(s) of Test <span class="required">*</span></span
+            >
+            <div class="field-value">2026-11-18</div>
+          </div>
+          <div>
+            <span class="field-label">User Role Tested</span>
+            <div class="field-value">Anonymous API client (no auth)</div>
+          </div>
+          <div>
+            <span class="field-label">Tenant / Organisation</span>
+            <div class="field-value">Hydatis</div>
+          </div>
+          <div>
+            <span class="field-label">Execution Duration</span>
+            <div class="field-value">~90 min (test authoring)</div>
+          </div>
+          <div>
+            <span class="field-label">Execution Cycle</span>
+            <div class="field-value">Cycle 1</div>
+          </div>
+        </div>
+
+        <!-- 04 Environment -->
+        <div class="section-title">
+          <i class="fas fa-cloud"></i> 04 Test Environment
+        </div>
+        <div class="grid-3col">
+          <div>
+            <span class="field-label"
+              >Environment Type <span class="required">*</span></span
+            >
+            <div class="field-value">Local (Dev)</div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Application Version <span class="required">*</span></span
+            >
+            <div class="field-value">server.js (Node 18+)</div>
+          </div>
+          <div>
+            <span class="field-label">Server / Base URL</span>
+            <div class="field-value">http://localhost:3002</div>
+          </div>
+          <div>
+            <span class="field-label">API Endpoint</span>
+            <div class="field-value">
+              /carts, /carts/:id/items, /carts/:id/promo, /carts/:id/checkout,
+              /orders/:id, /reset
+            </div>
+          </div>
+          <div>
+            <span class="field-label">Browser</span>
+            <div class="field-value">N/A (API only)</div>
+          </div>
+          <div>
+            <span class="field-label">Operating System</span>
+            <div class="field-value">macOS / Linux / Windows</div>
+          </div>
+          <div>
+            <span class="field-label">Database</span>
+            <div class="field-value">In-memory Map (reset via POST /reset)</div>
+          </div>
+          <div>
+            <span class="field-label">Device / Form Factor</span>
+            <div class="field-value">N/A</div>
+          </div>
+        </div>
+
+        <!-- 05 Preconditions -->
+        <div class="section-title">
+          <i class="fas fa-list"></i> 05 Preconditions, Postconditions &amp;
+          Dependencies
+        </div>
+        <div class="grid-2col">
+          <div>
+            <span class="field-label"
+              >Preconditions <span class="required">*</span></span
+            >
+            <div class="field-value">
+              Server running on localhost:3002; <code>POST /reset</code> before
+              each test; fresh cart via <code>POST /carts</code>.
+            </div>
+          </div>
+          <div>
+            <span class="field-label">Postconditions</span>
+            <div class="field-value">
+              Cart/order state match spec for the case; server reset after run.
+            </div>
+          </div>
+          <div>
+            <span class="field-label">Dependencies</span>
+            <div class="field-value">
+              Node 18+, Python 3.10+, pytest, requests.
+            </div>
+          </div>
+          <div>
+            <span class="field-label">Assumptions</span>
+            <div class="field-value">
+              Spec v1 is authoritative; money in integer cents; UTC for SUMMER25
+              expiry; codes case-insensitive (server trims/uppercases; spec
+              silent → documented assumption).
+            </div>
+          </div>
+          <div>
+            <span class="field-label"
+              >Required Test Data <span class="required">*</span></span
+            >
+            <div class="field-value">
+              products.json (8 products), promo codes WELCOME10, FIVEOFF,
+              SUMMER25 (expired), FREESHIP.
+            </div>
+          </div>
+          <div>
+            <span class="field-label">General Notes</span>
+            <div class="field-value">
+              Each case is independent; <code>POST /reset</code> is used as a
+              fixture. Expected results are derived from SPEC.md, never from the
+              server's current behaviour.
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 Planned Test Cases -->
+        <div class="section-title">
+          <i class="fas fa-list-ol"></i> 06 Planned Test Cases (102)
+        </div>
+
+        <!-- Catalogue -->
+        <div class="batch-header">
+          <i class="fas fa-box-open"></i> 1. Catalogue (prod) — 3 cases
+          <span class="batch-count">Priority: Medium</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>
+                  <span class="case-id">stc-prod-01-list catalogue</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">prod</span></td>
+                <td>1. GET <code>/products</code></td>
+                <td>
+                  200. Array of 8 products, each with id, name, priceCents,
+                  stock, values as in the initial catalogue.
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>
+                  <span class="case-id">stc-prod-02-get existing product</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">prod</span></td>
+                <td>1. GET <code>/products/1</code></td>
+                <td>
+                  200.
+                  <code
+                    >{id:1, name:"Amber Candle", priceCents:1995,
+                    stock:25}</code
+                  >.
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>
+                  <span class="case-id">stc-prod-03-get unknown product</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">prod</span></td>
+                <td>1. GET <code>/products/999</code></td>
+                <td>404 with <code>{"error": "..."}</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Cart -->
+        <div class="batch-header">
+          <i class="fas fa-shopping-cart"></i> 2. Cart creation and reading
+          (cart) — 4 cases
+          <span class="batch-count">Priority: High → Medium</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>4</td>
+                <td>
+                  <span class="case-id">stc-cart-01-create empty cart</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">cart</span></td>
+                <td>1. POST <code>/carts</code></td>
+                <td>
+                  201. status:"open", items:[], promoCodes:[], subtotalCents:0,
+                  discountCents:0, shippingCents:0, totalCents:0. Body has an
+                  id.
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>
+                  <span class="case-id">stc-cart-02-get existing cart</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">cart</span></td>
+                <td>1. Cart with P1 x1<br />2. GET <code>/carts/{id}</code></td>
+                <td>
+                  200. 1 line, subtotalCents:1995, shippingCents:490,
+                  totalCents:2485.
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>
+                  <span class="case-id">stc-cart-03-get unknown cart</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">cart</span></td>
+                <td>1. GET <code>/carts/c999</code></td>
+                <td>404 with <code>{"error": "..."}</code>.</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>
+                  <span class="case-id">stc-cart-04-cart view fields</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">cart</span></td>
+                <td>1. Cart with P1 x1<br />2. GET <code>/carts/{id}</code></td>
+                <td>
+                  Body has id, status, promoCodes, items[], subtotalCents,
+                  discountCents, shippingCents, totalCents. Each item has
+                  productId, name, unitPriceCents, quantity, lineTotalCents.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Item / Quantities -->
+        <div class="batch-header">
+          <i class="fas fa-cubes"></i> 3. Quantities: add, patch, delete (item)
+          — 25 cases
+          <span class="batch-count">Priority: High → Medium → Low</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>8</td>
+                <td>
+                  <span class="case-id">stc-item-01-add new product</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>
+                  1. Empty cart<br />2. POST <code>/carts/{id}/items</code>
+                  <code>{"productId":1,"quantity":2}</code>
+                </td>
+                <td>
+                  201. One line P1, quantity:2, lineTotalCents:3990,
+                  subtotalCents:3990.
+                </td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>
+                  <span class="case-id"
+                    >stc-item-02-add existing product increases line</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Add P1 x2<br />2. Add P1 x3</td>
+                <td>
+                  Step 2: 200. One line P1, quantity:5, lineTotalCents:9975.
+                </td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>
+                  <span class="case-id"
+                    >stc-item-03-add second product creates line</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Cart with P1 x1<br />2. Add P2 x1</td>
+                <td>201. Two lines. subtotalCents:3245.</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>
+                  <span class="case-id">stc-item-04-add quantity zero</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Empty cart<br />2. Add P1 quantity:0</td>
+                <td>400 <code>{error}</code>. Cart unchanged (no line).</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>
+                  <span class="case-id">stc-item-05-add negative quantity</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Empty cart<br />2. Add P1 quantity:-1</td>
+                <td>400. Cart unchanged.</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>
+                  <span class="case-id">stc-item-06-add decimal quantity</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Empty cart<br />2. Add P1 quantity:1.5</td>
+                <td>400. Cart unchanged.</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>
+                  <span class="case-id">stc-item-07-add string quantity</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Empty cart<br />2. Add P1 quantity:"2"</td>
+                <td>400. Cart unchanged.</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>
+                  <span class="case-id">stc-item-08-add missing fields</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>
+                  1. Add <code>{productId:1}</code><br />2. Add
+                  <code>{quantity:1}</code>
+                </td>
+                <td>Both: 400. Cart unchanged.</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>
+                  <span class="case-id">stc-item-09-add unknown product</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Add <code>{productId:999, quantity:1}</code></td>
+                <td>404.</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>
+                  <span class="case-id">stc-item-10-add to unknown cart</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>
+                  1. POST <code>/carts/c999/items</code>
+                  <code>{productId:1, quantity:1}</code>
+                </td>
+                <td>404.</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>
+                  <span class="case-id">stc-item-11-add invalid json</span
+                  ><span class="prio prio-l">L</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>
+                  1. POST <code>/carts/{id}/items</code> with body
+                  <code>{not json</code>
+                </td>
+                <td>400 <code>{error}</code>.</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>
+                  <span class="case-id">stc-item-12-limit exactly 10 units</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Empty cart<br />2. Add P7 x10</td>
+                <td>201. Line quantity:10, lineTotalCents:7990.</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>
+                  <span class="case-id"
+                    >stc-item-13-limit 11 units one request</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Empty cart<br />2. Add P7 x11</td>
+                <td>422. Cart unchanged.</td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>
+                  <span class="case-id"
+                    >stc-item-14-limit cumulative on line</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Add P7 x6<br />2. Add P7 x5 (line would be 11)</td>
+                <td>Step 2: 422. Line still quantity:6.</td>
+              </tr>
+              <tr>
+                <td>22</td>
+                <td>
+                  <span class="case-id">stc-item-15-limit per product</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Add P7 x10<br />2. Add P2 x10</td>
+                <td>Both succeed. 2 lines, 10 units each.</td>
+              </tr>
+              <tr>
+                <td>23</td>
+                <td>
+                  <span class="case-id">stc-item-16-patch quantity</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>
+                  1. Cart with P1 x2<br />2. PATCH
+                  <code>/carts/{id}/items/1</code> <code>{quantity:4}</code>
+                </td>
+                <td>
+                  200. quantity:4, lineTotalCents:7980, subtotalCents:7980.
+                </td>
+              </tr>
+              <tr>
+                <td>24</td>
+                <td>
+                  <span class="case-id"
+                    >stc-item-17-patch zero removes line</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>
+                  1. Cart with P1 x2 and P2 x1<br />2. PATCH P1 {quantity:0}
+                </td>
+                <td>200. Only P2 remains. subtotalCents:1250.</td>
+              </tr>
+              <tr>
+                <td>25</td>
+                <td>
+                  <span class="case-id">stc-item-18-patch negative</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Cart with P1 x2<br />2. PATCH P1 {quantity:-1}</td>
+                <td>400. Line unchanged (quantity:2).</td>
+              </tr>
+              <tr>
+                <td>26</td>
+                <td>
+                  <span class="case-id">stc-item-19-patch decimal</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Cart with P1 x2<br />2. PATCH P1 {quantity:2.5}</td>
+                <td>400. Line unchanged.</td>
+              </tr>
+              <tr>
+                <td>27</td>
+                <td>
+                  <span class="case-id">stc-item-20-patch above limit</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Cart with P7 x1<br />2. PATCH P7 {quantity:11}</td>
+                <td>422. Line unchanged.</td>
+              </tr>
+              <tr>
+                <td>28</td>
+                <td>
+                  <span class="case-id">stc-item-21-patch exactly limit</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Cart with P7 x1<br />2. PATCH P7 {quantity:10}</td>
+                <td>200. quantity:10.</td>
+              </tr>
+              <tr>
+                <td>29</td>
+                <td>
+                  <span class="case-id"
+                    >stc-item-22-patch product not in cart</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Cart with P1 x1<br />2. PATCH P2 {quantity:1}</td>
+                <td>404.</td>
+              </tr>
+              <tr>
+                <td>30</td>
+                <td>
+                  <span class="case-id">stc-item-23-delete line</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>
+                  1. Cart with P1 x1 and P2 x1<br />2. DELETE
+                  <code>/carts/{id}/items/1</code>
+                </td>
+                <td>
+                  200. Only P2 remains. Totals recalculated (subtotalCents:1250,
+                  shippingCents:490, totalCents:1740).
+                </td>
+              </tr>
+              <tr>
+                <td>31</td>
+                <td>
+                  <span class="case-id">stc-item-24-delete last line</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Cart with P1 x1<br />2. DELETE P1</td>
+                <td>200. items:[], all totals 0 and shippingCents:0.</td>
+              </tr>
+              <tr>
+                <td>32</td>
+                <td>
+                  <span class="case-id"
+                    >stc-item-25-delete line not in cart</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">item</span></td>
+                <td>1. Cart with P1 x1<br />2. DELETE P2</td>
+                <td>404.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Stock -->
+        <div class="batch-header">
+          <i class="fas fa-warehouse"></i> 4. Stock (stock) — 7 cases
+          <span class="batch-count">Priority: High → Medium</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>33</td>
+                <td>
+                  <span class="case-id">stc-stock-01-add exactly stock</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">stock</span></td>
+                <td>1. Empty cart<br />2. Add P4 x3 (stock 3)</td>
+                <td>201. quantity:3.</td>
+              </tr>
+              <tr>
+                <td>34</td>
+                <td>
+                  <span class="case-id">stc-stock-02-add above stock</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">stock</span></td>
+                <td>1. Empty cart<br />2. Add P4 x4</td>
+                <td>409. Cart unchanged.</td>
+              </tr>
+              <tr>
+                <td>35</td>
+                <td>
+                  <span class="case-id"
+                    >stc-stock-03-add cumulative above stock</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">stock</span></td>
+                <td>1. Add P4 x2<br />2. Add P4 x2</td>
+                <td>Step 2: 409. Line still quantity:2.</td>
+              </tr>
+              <tr>
+                <td>36</td>
+                <td>
+                  <span class="case-id">stc-stock-04-out of stock product</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">stock</span></td>
+                <td>1. Empty cart<br />2. Add P8 x1 (stock 0)</td>
+                <td>409. Cart unchanged.</td>
+              </tr>
+              <tr>
+                <td>37</td>
+                <td>
+                  <span class="case-id">stc-stock-05-patch exactly stock</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">stock</span></td>
+                <td>
+                  1. Cart with P6 x1 (stock 2)<br />2. PATCH P6 {quantity:2}
+                </td>
+                <td>200. quantity:2.</td>
+              </tr>
+              <tr>
+                <td>38</td>
+                <td>
+                  <span class="case-id">stc-stock-06-patch above stock</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">stock</span></td>
+                <td>1. Cart with P6 x1<br />2. PATCH P6 {quantity:3}</td>
+                <td>409. Line unchanged (quantity:1).</td>
+              </tr>
+              <tr>
+                <td>39</td>
+                <td>
+                  <span class="case-id"
+                    >stc-stock-07-stock rechecked at checkout</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">stock</span></td>
+                <td>
+                  1. Cart A and B, each with P6 x2<br />2. Checkout A<br />3.
+                  Checkout B
+                </td>
+                <td>
+                  Step 1: 201. Step 2: 409. Cart B still open. GET /products/6
+                  stock = 0.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Totals -->
+        <div class="batch-header">
+          <i class="fas fa-calculator"></i> 5. Totals and shipping (tot) — 8
+          cases
+          <span class="batch-count">Priority: High → Medium</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>40</td>
+                <td>
+                  <span class="case-id">stc-tot-01-subtotal multi lines</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">tot</span></td>
+                <td>
+                  1. Cart with P1 x2 and P2 x1<br />2. GET
+                  <code>/carts/{id}</code>
+                </td>
+                <td>
+                  subtotalCents:5240, discountCents:0, shippingCents:0,
+                  totalCents:5240.
+                </td>
+              </tr>
+              <tr>
+                <td>41</td>
+                <td>
+                  <span class="case-id"
+                    >stc-tot-02-shipping below threshold</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">tot</span></td>
+                <td>1. Cart with P2 x1<br />2. GET <code>/carts/{id}</code></td>
+                <td>subtotalCents:1250, shippingCents:490, totalCents:1740.</td>
+              </tr>
+              <tr>
+                <td>42</td>
+                <td>
+                  <span class="case-id">stc-tot-03-shipping at threshold</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">tot</span></td>
+                <td>1. Cart with P2 x4<br />2. GET <code>/carts/{id}</code></td>
+                <td>subtotalCents:5000, shippingCents:0, totalCents:5000.</td>
+              </tr>
+              <tr>
+                <td>43</td>
+                <td>
+                  <span class="case-id"
+                    >stc-tot-04-shipping just below threshold</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">tot</span></td>
+                <td>
+                  1. Cart with P1 x1 and P3 x1<br />2. GET
+                  <code>/carts/{id}</code>
+                </td>
+                <td>subtotalCents:4485, shippingCents:490, totalCents:4975.</td>
+              </tr>
+              <tr>
+                <td>44</td>
+                <td>
+                  <span class="case-id"
+                    >stc-tot-05-shipping uses subtotal after discount</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">tot</span></td>
+                <td>1. Cart with P1 x2 and P2 x1<br />2. Apply WELCOME10</td>
+                <td>discountCents:524, shippingCents:490, totalCents:5206.</td>
+              </tr>
+              <tr>
+                <td>45</td>
+                <td>
+                  <span class="case-id">stc-tot-06-shipping empty cart</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">tot</span></td>
+                <td>1. Empty cart<br />2. GET <code>/carts/{id}</code></td>
+                <td>shippingCents:0, totalCents:0.</td>
+              </tr>
+              <tr>
+                <td>46</td>
+                <td>
+                  <span class="case-id"
+                    >stc-tot-07-totals recalculated on read</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">tot</span></td>
+                <td>
+                  1. Cart with P1 x2<br />2. PATCH P1 {quantity:1}<br />3. GET
+                  <code>/carts/{id}</code>
+                </td>
+                <td>subtotalCents:1995, shippingCents:490, totalCents:2485.</td>
+              </tr>
+              <tr>
+                <td>47</td>
+                <td>
+                  <span class="case-id">stc-tot-08-line totals</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">tot</span></td>
+                <td>1. Cart with P3 x3<br />2. GET <code>/carts/{id}</code></td>
+                <td>
+                  Line unitPriceCents:2490, quantity:3, lineTotalCents:7470.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Promo -->
+        <div class="batch-header">
+          <i class="fas fa-ticket-alt"></i> 6. Promo codes (promo) — 21 cases
+          <span class="batch-count">Priority: High → Medium → Low</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>48</td>
+                <td>
+                  <span class="case-id">stc-promo-01-welcome10 valid</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Cart with P1 x2 (3990)<br />2. POST
+                  <code>/carts/{id}/promo</code> <code>{code:"WELCOME10"}</code>
+                </td>
+                <td>
+                  200. promoCodes:["WELCOME10"], discountCents:399,
+                  shippingCents:490, totalCents:4081.
+                </td>
+              </tr>
+              <tr>
+                <td>49</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-02-percent rounded half up</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Cart with P1 x1 (1995)<br />2. Apply WELCOME10</td>
+                <td>
+                  10% of 1995 = 199.5, so discountCents:200 (not 199).
+                  totalCents:2285.
+                </td>
+              </tr>
+              <tr>
+                <td>50</td>
+                <td>
+                  <span class="case-id">stc-promo-03-fiveoff valid</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Cart with P1 x2 (3990)<br />2. Apply FIVEOFF</td>
+                <td>
+                  200. discountCents:500, shippingCents:490, totalCents:3980.
+                </td>
+              </tr>
+              <tr>
+                <td>51</td>
+                <td>
+                  <span class="case-id">stc-promo-04-fiveoff below minimum</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Cart with P2 x2 (2500)<br />2. Apply FIVEOFF</td>
+                <td>422. promoCodes:[], totals unchanged.</td>
+              </tr>
+              <tr>
+                <td>52</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-05-fiveoff condition lost</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Cart with P1 x2 + FIVEOFF applied<br />2. PATCH P1
+                  {quantity:1}<br />3. GET <code>/carts/{id}</code>
+                </td>
+                <td>discountCents:0, shippingCents:490, totalCents:2485.</td>
+              </tr>
+              <tr>
+                <td>53</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-06-fiveoff condition back</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Continue from stc-promo-05<br />2. PATCH P1 {quantity:2}<br />3.
+                  GET <code>/carts/{id}</code>
+                </td>
+                <td>discountCents:500 again, totalCents:3980.</td>
+              </tr>
+              <tr>
+                <td>54</td>
+                <td>
+                  <span class="case-id">stc-promo-07-freeship</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Cart with P2 x1<br />2. Apply FREESHIP</td>
+                <td>200. discountCents:0, shippingCents:0, totalCents:1250.</td>
+              </tr>
+              <tr>
+                <td>55</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-08-discount plus freeship</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Cart with P1 x1<br />2. Apply WELCOME10<br />3. Apply
+                  FREESHIP
+                </td>
+                <td>
+                  Both 200. promoCodes has 2 codes. discountCents:200,
+                  shippingCents:0, totalCents:1795.
+                </td>
+              </tr>
+              <tr>
+                <td>56</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-09-second discount refused</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Cart with P1 x2<br />2. Apply WELCOME10<br />3. Apply
+                  FIVEOFF
+                </td>
+                <td>
+                  Step 2: 409. promoCodes:["WELCOME10"], totals unchanged.
+                </td>
+              </tr>
+              <tr>
+                <td>57</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-10-second discount refused reverse</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Cart with P1 x2<br />2. Apply FIVEOFF<br />3. Apply
+                  WELCOME10
+                </td>
+                <td>Step 2: 409. promoCodes:["FIVEOFF"], totals unchanged.</td>
+              </tr>
+              <tr>
+                <td>58</td>
+                <td>
+                  <span class="case-id">stc-promo-11-same code twice</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Cart with P1 x2<br />2. Apply WELCOME10<br />3. Apply
+                  WELCOME10 again
+                </td>
+                <td>
+                  Step 2: 200. promoCodes still has one WELCOME10.
+                  discountCents:399.
+                </td>
+              </tr>
+              <tr>
+                <td>59</td>
+                <td>
+                  <span class="case-id">stc-promo-12-unknown code</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Cart with P1 x1<br />2. Apply NOPE</td>
+                <td>404. promoCodes:[]</td>
+              </tr>
+              <tr>
+                <td>60</td>
+                <td>
+                  <span class="case-id">stc-promo-13-empty code</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Cart with P1 x1<br />2. Apply <code>{code:""}</code></td>
+                <td>400.</td>
+              </tr>
+              <tr>
+                <td>61</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-14-code wrong type or missing</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Cart with P1 x1<br />2. Apply <code>{}</code><br />3. Apply
+                  <code>{code:123}</code>
+                </td>
+                <td>Both 400.</td>
+              </tr>
+              <tr>
+                <td>62</td>
+                <td>
+                  <span class="case-id">stc-promo-15-unknown cart</span
+                  ><span class="prio prio-l">L</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. POST <code>/carts/c999/promo</code>
+                  <code>{code:"WELCOME10"}</code>
+                </td>
+                <td>404.</td>
+              </tr>
+              <tr>
+                <td>63</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-16-promo on checked out cart</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Cart with P1 x1, checked out<br />2. Apply WELCOME10</td>
+                <td>409.</td>
+              </tr>
+              <tr>
+                <td>64</td>
+                <td>
+                  <span class="case-id">stc-promo-17-summer25 expired</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. System date after 31 Aug 2026<br />2. Apply SUMMER25</td>
+                <td>422 (expired code, not 404). promoCodes:[]</td>
+              </tr>
+              <tr>
+                <td>65</td>
+                <td>
+                  <span class="case-id">stc-promo-18-summer25 valid</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Clock up to 31 Aug 2026, cart with P1 x2 (3990)<br />2.
+                  Apply SUMMER25
+                </td>
+                <td>
+                  200. 25% of 3990 = 997.5, so discountCents:998.
+                  totalCents:3482.
+                </td>
+              </tr>
+              <tr>
+                <td>66</td>
+                <td>
+                  <span class="case-id">stc-promo-19-summer25 last day</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Clock 2026-08-31 23:59 UTC<br />2. Apply SUMMER25</td>
+                <td>200 (the last day is included).</td>
+              </tr>
+              <tr>
+                <td>67</td>
+                <td>
+                  <span class="case-id">stc-promo-20-summer25 day after</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>1. Clock 2026-09-01 00:00 UTC<br />2. Apply SUMMER25</td>
+                <td>422.</td>
+              </tr>
+              <tr>
+                <td>68</td>
+                <td>
+                  <span class="case-id"
+                    >stc-promo-21-discount capped at subtotal</span
+                  ><span class="prio prio-l">L</span>
+                </td>
+                <td><span class="area-chip">promo</span></td>
+                <td>
+                  1. Cart with P2 x3 (3750) + FIVEOFF, then reduce the cart<br />2.
+                  Check discountCents &le; subtotalCents after every cart change
+                </td>
+                <td>
+                  discountCents never above subtotalCents, totalCents never
+                  negative.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Checkout -->
+        <div class="batch-header">
+          <i class="fas fa-credit-card"></i> 7. Checkout (chk) — 10 cases
+          <span class="batch-count">Priority: High → Medium → Low</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>69</td>
+                <td>
+                  <span class="case-id">stc-chk-01-checkout success</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>
+                  1. Cart with P1 x2<br />2. POST
+                  <code>/carts/{id}/checkout</code><br />3. GET
+                  <code>/carts/{id}</code><br />4. GET <code>/products/1</code>
+                </td>
+                <td>
+                  201. Order with status:"pending_payment", copy of items,
+                  totals equal to the cart's. Cart status:"checked_out". P1
+                  stock 25 → 23.
+                </td>
+              </tr>
+              <tr>
+                <td>70</td>
+                <td>
+                  <span class="case-id">stc-chk-02-order totals with promo</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>1. Cart with P1 x2 + WELCOME10<br />2. Checkout</td>
+                <td>
+                  201. Order subtotalCents:3990, discountCents:399,
+                  shippingCents:490, totalCents:4081.
+                </td>
+              </tr>
+              <tr>
+                <td>71</td>
+                <td>
+                  <span class="case-id"
+                    >stc-chk-03-multi line stock decrease</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>
+                  1. Cart with P1 x2 and P4 x1<br />2. Checkout<br />3. GET
+                  <code>/products</code>
+                </td>
+                <td>P1 stock 23, P4 stock 2.</td>
+              </tr>
+              <tr>
+                <td>72</td>
+                <td>
+                  <span class="case-id">stc-chk-04-empty cart</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>1. Empty cart<br />2. Checkout</td>
+                <td>422. Cart still open.</td>
+              </tr>
+              <tr>
+                <td>73</td>
+                <td>
+                  <span class="case-id">stc-chk-05-already checked out</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>1. Cart checked out<br />2. Checkout again</td>
+                <td>409. No second order, stock decreased only once.</td>
+              </tr>
+              <tr>
+                <td>74</td>
+                <td>
+                  <span class="case-id">stc-chk-06-unknown cart</span
+                  ><span class="prio prio-l">L</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>1. POST <code>/carts/c999/checkout</code></td>
+                <td>404.</td>
+              </tr>
+              <tr>
+                <td>75</td>
+                <td>
+                  <span class="case-id"
+                    >stc-chk-07-cart frozen after checkout</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>
+                  1. Cart checked out<br />2. POST an item<br />3. PATCH a
+                  line<br />4. DELETE a line
+                </td>
+                <td>All 409. Cart content unchanged.</td>
+              </tr>
+              <tr>
+                <td>76</td>
+                <td>
+                  <span class="case-id"
+                    >stc-chk-08-conflict changes nothing</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>
+                  1. Cart A: P6 x2. Cart B: P1 x1 + P6 x2<br />2. Checkout A<br />3.
+                  Checkout B<br />4. GET <code>/products/1</code>
+                </td>
+                <td>
+                  Step 2: 409. P1 stock still 25 (no partial decrease). Cart B
+                  still open.
+                </td>
+              </tr>
+              <tr>
+                <td>77</td>
+                <td>
+                  <span class="case-id">stc-chk-09-get order</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>1. Order o1 created<br />2. GET <code>/orders/o1</code></td>
+                <td>200. Same content as returned by the checkout.</td>
+              </tr>
+              <tr>
+                <td>78</td>
+                <td>
+                  <span class="case-id">stc-chk-10-get unknown order</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">chk</span></td>
+                <td>1. GET <code>/orders/o999</code></td>
+                <td>404.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Orders -->
+        <div class="batch-header">
+          <i class="fas fa-truck"></i> 8. Order status (ord) — 10 cases
+          <span class="batch-count">Priority: High → Medium → Low</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>79</td>
+                <td>
+                  <span class="case-id">stc-ord-01-pay pending order</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>
+                  1. Order created (P1 stock 23)<br />2. POST
+                  <code>/orders/{id}/pay</code>
+                </td>
+                <td>200. status:"paid".</td>
+              </tr>
+              <tr>
+                <td>80</td>
+                <td>
+                  <span class="case-id">stc-ord-02-ship paid order</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>1. Pay<br />2. POST <code>/orders/{id}/ship</code></td>
+                <td>Step 2: 200. status:"shipped".</td>
+              </tr>
+              <tr>
+                <td>81</td>
+                <td>
+                  <span class="case-id">stc-ord-03-cancel pending order</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>1. Cancel<br />2. GET <code>/products/1</code></td>
+                <td>200. status:"cancelled". P1 stock back to 25.</td>
+              </tr>
+              <tr>
+                <td>82</td>
+                <td>
+                  <span class="case-id">stc-ord-04-cancel paid order</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>
+                  1. Pay<br />2. Cancel<br />3. GET <code>/products/1</code>
+                </td>
+                <td>Step 2: 200 cancelled. P1 stock 25.</td>
+              </tr>
+              <tr>
+                <td>83</td>
+                <td>
+                  <span class="case-id">stc-ord-05-ship unpaid order</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>1. Ship (order still pending_payment)</td>
+                <td>409. Order still pending_payment.</td>
+              </tr>
+              <tr>
+                <td>84</td>
+                <td>
+                  <span class="case-id">stc-ord-06-pay twice</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>1. Pay<br />2. Pay again</td>
+                <td>Step 2: 409. Status still paid.</td>
+              </tr>
+              <tr>
+                <td>85</td>
+                <td>
+                  <span class="case-id">stc-ord-07-pay shipped order</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>1. Pay<br />2. Ship<br />3. Pay</td>
+                <td>Step 3: 409. Status still shipped.</td>
+              </tr>
+              <tr>
+                <td>86</td>
+                <td>
+                  <span class="case-id">stc-ord-08-cancel shipped order</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>
+                  1. Pay<br />2. Ship<br />3. Cancel<br />4. GET
+                  <code>/products/1</code>
+                </td>
+                <td>
+                  Step 3: 409. Status shipped. Stock not restored (P1 stock 23).
+                </td>
+              </tr>
+              <tr>
+                <td>87</td>
+                <td>
+                  <span class="case-id">stc-ord-09-change cancelled order</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>
+                  1. Cancel<br />2. Pay<br />3. Ship<br />4. Cancel again<br />5.
+                  GET <code>/products/1</code>
+                </td>
+                <td>
+                  Steps 2, 3, 4: 409. Status cancelled. P1 stock 25 (restored
+                  only once, not 27).
+                </td>
+              </tr>
+              <tr>
+                <td>88</td>
+                <td>
+                  <span class="case-id">stc-ord-10-action on unknown order</span
+                  ><span class="prio prio-l">L</span>
+                </td>
+                <td><span class="area-chip">ord</span></td>
+                <td>1. POST <code>/orders/o999/pay</code></td>
+                <td>404.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Concurrency -->
+        <div class="batch-header">
+          <i class="fas fa-bolt"></i> 9. Concurrency (conc) — 2 cases
+          <span class="batch-count">Priority: High</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>89</td>
+                <td>
+                  <span class="case-id"
+                    >stc-conc-01-parallel checkout same stock</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">conc</span></td>
+                <td>
+                  1. P6 stock 2. Cart A: P6 x2. Cart B: P6 x2<br />2. Send both
+                  checkouts at the same time (parallel requests)<br />3. GET
+                  <code>/products/6</code>
+                </td>
+                <td>
+                  Exactly one 201 and one 409. P6 stock = 0 (never negative).
+                </td>
+              </tr>
+              <tr>
+                <td>90</td>
+                <td>
+                  <span class="case-id"
+                    >stc-conc-02-parallel checkout many carts</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">conc</span></td>
+                <td>
+                  1. P6 stock 2. 5 carts, each with P6 x1<br />2. Send the 5
+                  checkouts at the same time<br />3. GET
+                  <code>/products/6</code>
+                </td>
+                <td>Exactly 2 x 201 and 3 x 409. P6 stock = 0.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ambiguous -->
+        <div class="batch-header">
+          <i class="fas fa-question-circle"></i> 10. Unclear spec points (amb) —
+          12 cases
+          <span class="batch-count"
+            >Priority: High → Medium → Low · @proposed</span
+          >
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 44px">#</th>
+                <th style="min-width: 300px">Test Case ID</th>
+                <th style="min-width: 100px">Area</th>
+                <th style="min-width: 300px">Steps to Reproduce</th>
+                <th style="min-width: 300px">Expected Result (SPEC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>91</td>
+                <td>
+                  <span class="case-id"
+                    >stc-amb-01-limit and stock both broken on add</span
+                  ><span class="prio prio-h">H</span>
+                  <span class="proposed-badge">@proposed</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Empty cart<br />2. Add P4 x11 (limit 10 exceeded and stock
+                  3 exceeded)
+                </td>
+                <td>
+                  Cart unchanged. Status 422 (proposed: request-level quantity
+                  rule checked before stock rule). Record actual and report if
+                  409.
+                </td>
+              </tr>
+              <tr>
+                <td>92</td>
+                <td>
+                  <span class="case-id"
+                    >stc-amb-02-limit and stock both broken on line</span
+                  ><span class="prio prio-m">M</span>
+                  <span class="proposed-badge">@proposed</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>1. Cart with P4 x2<br />2. Add P4 x9 (line would be 11)</td>
+                <td>
+                  Line stays at quantity:2. Status 422 (proposed), same rule as
+                  stc-amb-01.
+                </td>
+              </tr>
+              <tr>
+                <td>93</td>
+                <td>
+                  <span class="case-id"
+                    >stc-amb-03-limit and stock both broken on patch</span
+                  ><span class="prio prio-m">M</span>
+                  <span class="proposed-badge">@proposed</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>1. Cart with P4 x1<br />2. PATCH P4 {quantity:11}</td>
+                <td>
+                  Line unchanged. Status 422 (proposed), consistent with
+                  stc-amb-01.
+                </td>
+              </tr>
+              <tr>
+                <td>94</td>
+                <td>
+                  <span class="case-id">stc-amb-04-promo lowercase</span
+                  ><span class="prio prio-m">M</span>
+                  <span class="proposed-badge">@proposed</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>1. Cart with P1 x2<br />2. Apply <code>welcome10</code></td>
+                <td>
+                  Spec silent. Proposed: 200 with WELCOME10 applied
+                  (case-insensitive). Alternative: 404. Behaviour must be
+                  consistent for every code.
+                </td>
+              </tr>
+              <tr>
+                <td>95</td>
+                <td>
+                  <span class="case-id"
+                    >stc-amb-05-promo surrounding spaces</span
+                  ><span class="prio prio-m">M</span>
+                  <span class="proposed-badge">@proposed</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Cart with P1 x2<br />2. Apply <code>" WELCOME10 "</code>
+                </td>
+                <td>
+                  Spec silent. Proposed: 200 with promoCodes:["WELCOME10"]
+                  (trimmed). Alternative: 400 or 404. Record actual status.
+                </td>
+              </tr>
+              <tr>
+                <td>96</td>
+                <td>
+                  <span class="case-id"
+                    >stc-amb-06-promo mixed case no duplicate</span
+                  ><span class="prio prio-l">L</span>
+                  <span class="proposed-badge">@proposed</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Cart with P1 x2<br />2. Apply WELCOME10<br />3. Apply
+                  welcome10
+                </td>
+                <td>
+                  If case-insensitive: step 2 returns 200 and promoCodes has one
+                  entry, discountCents:399. A duplicate entry or doubled
+                  discount is a bug.
+                </td>
+              </tr>
+              <tr>
+                <td>97</td>
+                <td>
+                  <span class="case-id"
+                    >stc-amb-07-patch above limit with enough stock</span
+                  ><span class="prio prio-h">H</span>
+                  <span class="proposed-badge">@proposed</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Cart with P7 x1 (stock 100)<br />2. PATCH P7 {quantity:11}
+                </td>
+                <td>
+                  422 (proposed, same as stc-item-20). Line unchanged. Confirm
+                  with author that section 3 rule 2 covers PATCH.
+                </td>
+              </tr>
+              <tr>
+                <td>98</td>
+                <td>
+                  <span class="case-id">stc-amb-08-fiveoff just below 3000</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Cart with P7 x2 and P2 x1 (subtotal 2848)<br />2. Apply
+                  FIVEOFF
+                </td>
+                <td>422. promoCodes:[]</td>
+              </tr>
+              <tr>
+                <td>99</td>
+                <td>
+                  <span class="case-id">stc-amb-09-fiveoff just above 3000</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Cart with P7 x4 (subtotal 3196)<br />2. Apply FIVEOFF
+                </td>
+                <td>
+                  200. discountCents:500, shippingCents:490, totalCents:3186.
+                </td>
+              </tr>
+              <tr>
+                <td>100</td>
+                <td>
+                  <span class="case-id">stc-amb-10-fiveoff exactly 3000</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Product priced at exactly 3000 exists<br />2. Add that
+                  product x1<br />3. Apply FIVEOFF
+                </td>
+                <td>
+                  200 (spec: "3000 or more"). discountCents:500. Also test 2999
+                  on the same setup: 422.
+                </td>
+              </tr>
+              <tr>
+                <td>101</td>
+                <td>
+                  <span class="case-id">stc-amb-11-fiveoff on emptied cart</span
+                  ><span class="prio prio-m">M</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Cart with P1 x2 and FIVEOFF applied<br />2. DELETE P1<br />3.
+                  GET <code>/carts/{id}</code>
+                </td>
+                <td>
+                  subtotalCents:0, discountCents:0, shippingCents:0,
+                  totalCents:0. No negative total.
+                </td>
+              </tr>
+              <tr>
+                <td>102</td>
+                <td>
+                  <span class="case-id"
+                    >stc-amb-12-fiveoff after reduction to small cart</span
+                  ><span class="prio prio-h">H</span>
+                </td>
+                <td><span class="area-chip">amb</span></td>
+                <td>
+                  1. Cart with P1 x2 and FIVEOFF applied<br />2. PATCH P1
+                  {quantity:0}<br />3. Add P7 x1 (subtotal 799)<br />4. GET
+                  <code>/carts/{id}</code>
+                </td>
+                <td>
+                  discountCents:0 (condition no longer met), shippingCents:490,
+                  totalCents:1289. A discount of 500 here is a bug.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BUG-08 · Maison Lumen API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f4f7fc;
+        padding: 40px 20px;
+        color: #1e293b;
+      }
+      .container { max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+      .page-title { font-size: 26px; font-weight: 700; color: #0b2b4a; margin-bottom: 4px; }
+      .page-subtitle { font-size: 14px; color: #5f7d9c; margin-bottom: 8px; }
+      .template-card {
+        background: #ffffff;
+        border-radius: 28px;
+        box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.15);
+        padding: 32px 36px 40px;
+        border: 1px solid #e9eef3;
+      }
+      .template-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #eef2f6;
+        padding-bottom: 18px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .template-header h2 {
+        font-weight: 600;
+        font-size: 22px;
+        letter-spacing: -0.3px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #0b2b4a;
+      }
+      .template-header h2 i { color: #2f6f9f; font-size: 20px; }
+      .badge-company {
+        background: #dceaf5;
+        color: #1b4b6c;
+        padding: 6px 18px;
+        border-radius: 60px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 32px; }
+      .grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 28px; }
+      .grid-4col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 20px; }
+      .field-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 6px; }
+      .field-label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: #5f7d9c;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .field-value {
+        font-size: 15px;
+        font-weight: 500;
+        color: #0f2b40;
+        background: #f8fafc;
+        padding: 8px 14px;
+        border-radius: 12px;
+        border: 1px solid #e2e9f2;
+        min-height: 42px;
+        overflow-wrap: anywhere;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .field-value.empty {
+        color: #94a3b8;
+        font-style: italic;
+        font-weight: 400;
+      }
+      .field-value .tag { background: #e0e9f3; padding: 2px 12px; border-radius: 30px; font-size: 13px; font-weight: 500; color: #1a405b; }
+      .field-value .tag-red { background: #f8dddd; color: #a13d3d; }
+      .field-value .tag-orange { background: #fbe6cf; color: #a15b1f; }
+      .field-value .tag-green { background: #d4edda; color: #1f6e4a; }
+      .field-value .tag-blue { background: #d2e4fa; color: #1f5a8e; }
+      .field-value .tag-gray { background: #e2e8f0; color: #475569; }
+      .section-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1b3b57;
+        margin: 22px 0 16px 0;
+        padding-bottom: 6px;
+        border-bottom: 1px dashed #d6e2ef;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .section-title i { color: #2f6f9f; font-size: 18px; width: 24px; }
+      .placeholder-note {
+        background: #fef9e7;
+        border: 1px dashed #f0c674;
+        border-radius: 8px;
+        padding: 12px 18px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #7a6a2b;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .placeholder-note i { font-size: 18px; color: #d4a12b; }
+      .required-star { color: #b91c1c; font-size: 14px; }
+      @media (max-width: 900px) {
+        .grid-2col, .grid-3col, .grid-4col { grid-template-columns: 1fr; }
+        .template-card { padding: 24px 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <div class="page-title">BUG-08: Adding exactly the available stock is refused</div>
+        <div class="page-subtitle">Maison Lumen cart and promo-code API · Reference: SPEC.md v1 · Reproduced against the running server on 20/11/2026</div>
+      </div>
+
+      <!-- ===== EMPTY BUG REPORT TEMPLATE ===== -->
+      <div class="template-card">
+        <!-- PLACEHOLDER NOTE -->
+        <div class="template-header">
+          <h2><i class="fas fa-bug"></i> Bug Report · <span style="color:#94a3b8; font-weight:400;">BUG-08</span></h2>
+          <span class="badge-company">High · P2</span>
+        </div>
+
+        <!-- ===== SECTION 1: BASIC INFORMATION ===== -->
+        <div class="grid-4col">
+          <div class="field-group">
+            <span class="field-label"><i class="far fa-id-card"></i> ID <span class="required-star">*</span></span>
+            <div class="field-value ">BUG-08</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label"><i class="far fa-calendar-alt"></i> Submit Date <span class="required-star">*</span></span>
+            <div class="field-value ">20/11/2026</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label"><i class="fas fa-heading"></i> Title <span class="required-star">*</span></span>
+            <div class="field-value ">Adding exactly the available stock is refused</div>
+          </div>
+          <div class="field-group">
+            <span class="field-label"><i class="fas fa-user"></i> Reporter <span class="required-star">*</span></span>
+            <div class="field-value ">Dalii · QA</div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 2: BUG OVERVIEW ===== -->
+        <div class="section-title"><i class="fas fa-binoculars"></i> Bug Overview</div>
+        <div class="grid-2col">
+          <div>
+            <span class="field-label">Summary <span class="required-star">*</span></span>
+            <div class="field-value ">Adding 3 Reed Diffusers (stock 3) in one request returns 409. Adding 1, then changing to 3, works.</div>
+          </div>
+          <div>
+            <span class="field-label">Module / Class <span class="required-star">*</span></span>
+            <div class="field-value ">POST /carts/{id}/items · stock check (tests/test_stock.py)</div>
+          </div>
+          <div>
+            <span class="field-label">Category <span class="required-star">*</span></span>
+            <div class="field-value ">Stock</div>
+          </div>
+          <div>
+            <span class="field-label">Layer <span class="required-star">*</span></span>
+            <div class="field-value ">Backend / API</div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 3: TECHNICAL ENVIRONMENT ===== -->
+        <div class="section-title"><i class="fas fa-server"></i> Technical Environment</div>
+        <div class="grid-3col">
+          <div>
+            <span class="field-label">Environment</span>
+            <div class="field-value ">Local server (<code>node server.js</code>, port 3002)</div>
+          </div>
+          <div>
+            <span class="field-label">Platform</span>
+            <div class="field-value ">REST API (Node.js)</div>
+          </div>
+          <div>
+            <span class="field-label">Test Duration</span>
+            <div class="field-value ">stc-stock-01: 10 ms</div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 4: DEFECT DETAILS ===== -->
+        <div class="section-title"><i class="fas fa-clipboard-list"></i> Defect Details</div>
+        <div class="grid-2col">
+          <div>
+            <span class="field-label">Precondition <span class="required-star">*</span></span>
+            <div class="field-value ">Server freshly reset. Reed Diffuser Set (id 4) priceCents 3990, stock 3.</div>
+          </div>
+          <div>
+            <span class="field-label">Steps to Reproduce <span class="required-star">*</span></span>
+            <div class="field-value "><div><strong>Add exactly the stock</strong><ol style='margin:6px 0 10px 20px'><li style='margin:3px 0'><code>curl -X POST http://localhost:3002/reset</code></li><li style='margin:3px 0'><code>curl -X POST http://localhost:3002/carts</code></li><li style='margin:3px 0'><code>curl -X POST http://localhost:3002/carts/c1/items -H &quot;Content-Type: application/json&quot; -d &#x27;{&quot;productId&quot;: 4, &quot;quantity&quot;: 3}&#x27;</code></li></ol></div><div><strong>Workaround: add 1 then change to 3</strong><ol style='margin:6px 0 10px 20px'><li style='margin:3px 0'><code>curl -X POST http://localhost:3002/reset</code></li><li style='margin:3px 0'><code>curl -X POST http://localhost:3002/carts</code></li><li style='margin:3px 0'><code>curl -X POST http://localhost:3002/carts/c1/items -H &quot;Content-Type: application/json&quot; -d &#x27;{&quot;productId&quot;: 4, &quot;quantity&quot;: 1}&#x27;</code></li><li style='margin:3px 0'><code>curl -X PATCH http://localhost:3002/carts/c1/items/4 -H &quot;Content-Type: application/json&quot; -d &#x27;{&quot;quantity&quot;: 3}&#x27;</code></li></ol></div></div>
+          </div>
+          <div>
+            <span class="field-label">Expected Result <span class="required-star">*</span></span>
+            <div class="field-value "><ul style='margin-left:18px'><li>201, and the line holds 3 units.</li></ul></div>
+          </div>
+          <div>
+            <span class="field-label">Actual Result <span class="required-star">*</span></span>
+            <div class="field-value "><ul style='margin-left:18px'><li>409 {&quot;error&quot;:&quot;Not enough stock&quot;}.</li></ul></div>
+          </div>
+          <div>
+            <span class="field-label">Error / Stack Trace</span>
+            <div class="field-value " style="font-family:'Consolas','Courier New',monospace; font-size:13px;">POST /carts/c1/items  -&gt;  HTTP 409<br>{&quot;error&quot;: &quot;Not enough stock&quot;}</div>
+          </div>
+          <div>
+            <span class="field-label">Impact <span class="required-star">*</span></span>
+            <div class="field-value ">Customers cannot buy the last units in one step. The rule is inconsistent between POST and PATCH. No wrong data is stored.</div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 5: CLASSIFICATION ===== -->
+        <div class="section-title"><i class="fas fa-tags"></i> Classification</div>
+        <div class="grid-3col">
+          <div>
+            <span class="field-label">Severity <span class="required-star">*</span></span>
+            <div class="field-value "><span class="tag tag-orange">High</span> A rule is broken but a workaround exists.</div>
+          </div>
+          <div>
+            <span class="field-label">Priority <span class="required-star">*</span></span>
+            <div class="field-value "><span class="tag tag-blue">P2</span> fix order 8 of 10</div>
+          </div>
+          <div>
+            <span class="field-label">Bug Type</span>
+            <div class="field-value ">Functional</div>
+          </div>
+          <div>
+            <span class="field-label">Reproducibility</span>
+            <div class="field-value ">Always</div>
+          </div>
+          <div>
+            <span class="field-label">Test Case ID</span>
+            <div class="field-value ">stc-stock-01</div>
+          </div>
+          <div>
+            <span class="field-label">Status <span class="required-star">*</span></span>
+            <div class="field-value "><span class="tag tag-red">Open</span></div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 6: RECOMMENDATION ===== -->
+        <div class="section-title"><i class="fas fa-tools"></i> Recommendation</div>
+        <div class="grid-2col">
+          <div>
+            <span class="field-label">Suggested Fix <span class="required-star">*</span></span>
+            <div class="field-value ">Refuse only when quantity is strictly greater than the stock.<br><br><em>Possible cause:</em> The add handler compares with &gt;= instead of &gt;.</div>
+          </div>
+        </div>
+
+        <!-- ===== FOOTER: REQUIRED FIELDS ===== -->
+        <div style="margin-top: 28px; padding-top: 16px; border-top: 1px solid #e2e8f0; font-size: 13px; color: #94a3b8; text-align: center;">
+          <i class="fas fa-asterisk" style="color:#b91c1c; font-size:10px;"></i> Spec reference: SPEC §3, rule 3: “Exactly the stock is allowed. Above: 409.”
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
